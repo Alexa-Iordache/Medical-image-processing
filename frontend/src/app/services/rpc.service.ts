@@ -5,31 +5,30 @@ import axios from 'axios';
   providedIn: 'root'
 })
 export class RpcService {
-  private url = 'http://localhost:3000';
+  private url = 'http://localhost:4201/api';
   constructor() { }
 
-  public ask(endpoint: any, params: any, callback: any) {
-    let body = {
-      endpoint: endpoint,
-      id: 1,
-      jsonrpc: "2.0",
-      params: params
-    };
+  // RPC - calls other sprocesses on the remote system like a local system
+  callRPC(endpoint: any, params: any, callback: any): void {
+    // the response is expressed as a single json object
+    // rpc call has fixed parameters: jsonrpc, method, params, id
 
-    axios({
-      url: this.url,
-      data: body,
-      method: 'post'
-    })
-    .then(response => {
-      if (response) {
+    let body = {
+      "jsonrpc": "2.0",
+      "method": endpoint,
+      "params": params,
+      "id": "1"
+    }
+
+    // axios - used to make http requests
+    axios.post(this.url, body)
+    .then (response => {
+      if(response)
         callback(null, response.data);
-      }
     })
-    .catch(err => {
-      if (err) {
-        callback(err, null);
-      }
-    });
+    .catch(error => {
+      if(error)
+        callback(error, null);
+    })
   }
 }

@@ -1,0 +1,25 @@
+@mixin font-settings ($font-weight, $font-size, $line-height, $spacing) {
+  font-weight: $font-weight;
+  font-size: $font-size;
+  line-height: $line-height;
+  letter-spacing: $spacing;
+}
+
+// normal text - for title
+.text-1 {
+  @include font-settings(normal, 30px, 36px, 0.14px)
+}
+
+// normal text
+.text-2 {
+  @include font-settings(normal, 22px, 32px, 0.14px)
+}
+
+//bold - text
+.text-3 {
+  @include font-settings(bold, 20px, 24px, 0.14px)
+}
+
+.text-4 {
+  @include font-settings(bold, 30px, 24px, 0.14px)
+}
