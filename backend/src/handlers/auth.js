@@ -32,7 +32,7 @@ let auth = {
         let receivedUsername = { username: result.Username };
         jwt.sign(
           receivedUsername,
-          "JWTSecretKeyForMedicalApp",
+          "JWTSecretKeyForMedicalAp",
           (error, encoded) => {
             receivedUsername.encoded = encoded;
             res.json({ id: 1, error: null, result: receivedUsername });
