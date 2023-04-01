@@ -1,0 +1,83 @@
+@mixin photo(
+  $borderWidth,
+  $borderStyle,
+  $borderColor,
+  $width,
+  $marginRight
+) {
+  border-width: $borderWidth;
+  border-style: $borderStyle;
+  border-color: $borderColor;
+  width: $width;
+  margin-right: $marginRight;
+}
+
+@mixin topContainers (
+  $display,
+  $flexDirection,
+  $justifyContent,
+  $width,
+  $height,
+  $marginLeft,
+  $marginRight,
+  $paddingTop
+) {
+  display: $display;
+  flex-direction: $flexDirection;
+  justify-content: $justifyContent;
+  width: $width;
+  height: $height;
+  margin-left: $marginLeft;
+  margin-right: $marginRight;
+  padding-top: $paddingTop;
+}
+
+.main-page {
+  height: 100%;
+  width: 100%;
+  background-image: url("../../images/main-page.png");
+
+  .main-page_top-part {
+    display: flex;
+    flex-direction: row;
+
+    .main-page_menu-container {
+      @include topContainers(flex, column, space-between, 250px, 300px, 100px, 0, 50px);
+
+      .menu-button {
+        height: 60px;
+      }
+    }
+
+    .main-page_photo-container {
+      @include topContainers(flex, row, space-between, 1000px, 300px, 80px, 100px, 50px);
+
+      .first-photo {
+        @include photo(1px, solid, balck, 100%, 50px);
+      }
+
+      .second-photo {
+        @include photo(1px, solid, balck, 100%, 50px);
+      }
+
+      .third-photo {
+        @include photo(1px, solid, balck, 100%, 0);
+      }
+    }
+  }
+
+  .main-page_bottom-part {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px 100px;
+
+    .parameters-containter {
+      width: 100%;
+    }
+
+    .result-button {
+      margin-top: 50px;
+    }
+  }
+}

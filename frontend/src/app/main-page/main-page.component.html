@@ -1,1 +1,45 @@
-<p>main-page works!</p>
+<div class="main-page">
+  <div class="main-page_top-part">
+    <div class="main-page_menu-container">
+      <button mat-raised-button color="accent" class="menu-button">
+        Browse input
+      </button>
+      <button mat-raised-button color="accent" class="menu-button">
+        Tumor detection
+      </button>
+      <button mat-raised-button color="accent" class="menu-button">
+        Reset
+      </button>
+      <button mat-raised-button color="accent" class="menu-button">Exit</button>
+    </div>
+
+    <div class="main-page_photo-container">
+      <div class="first-photo">photo1</div>
+      <div class="second-photo">photo2</div>
+      <div class="third-photo">photo3</div>
+    </div>
+  </div>
+
+  <div class="main-page_bottom-part">
+    <div class="parameters-containter">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title> Parameters </mat-panel-title>
+            <mat-panel-description>
+              Click here to see the parameter values
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <p>Contrast</p>
+          <p>Entropy</p>
+          <p>IDM</p>
+          <p>Dissimilarity</p>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+
+    <button mat-raised-button color="warn" class="result-button">
+      Show result
+    </button>
+  </div>
+</div>
