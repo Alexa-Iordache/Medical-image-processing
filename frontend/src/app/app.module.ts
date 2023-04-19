@@ -16,12 +16,15 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { UploadFileComponent } from './upload-file/upload-file.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
-    MainPageComponent
+    MainPageComponent,
+    UploadFileComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatCardModule,
     MatSelectModule,
     MatDialogModule,
-    MatExpansionModule
+    MatExpansionModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
