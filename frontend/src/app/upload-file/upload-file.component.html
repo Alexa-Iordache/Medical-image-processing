@@ -3,7 +3,7 @@
 
 <div class="file-upload">
 
-   {{fileName || "No file uploaded yet."}}
+   {{ImagePath || "No file uploaded yet."}}
 
     <button mat-mini-fab color="primary" class="upload-btn"
       (click)="fileUpload.click()">
@@ -11,4 +11,5 @@
     </button>
 </div>
 
-<!-- <div>ceva</div> -->
+<div class="ceva"></div>
+<img *ngIf="ImagePath !== ''" [src]="ImagePath" style="width: 600px;height: 400px;">

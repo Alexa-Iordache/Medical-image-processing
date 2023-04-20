@@ -1,37 +1,37 @@
-import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-upload-file',
   templateUrl: './upload-file.component.html',
   styleUrls: ['./upload-file.component.scss'],
 })
-export class UploadFileComponent {
-  fileName = '';
-  postId: any;
+export class UploadFileComponent implements OnInit {
+  ImagePath = '';
 
-  constructor(private http: HttpClient) {}
+  // constructor() {
+  //   //image location
+  //   this.ImagePath = 'test.png';
+  // }
 
-  ngOnInit() {
-    this.http.post<any>('https://reqres.in/api/posts', { title: 'Angular POST Request Example' }).subscribe(data => {
-        this.postId = data.id;
-    })
+  ngOnInit() {}
+
+  onFileSelected(event:any) {
+
+    const file:File = event.target.files[0];
+    console.log(file.name);
+    this.ImagePath = file.name;
+
+    // if (file) {
+
+    //     this.fileName = file.name;
+
+    //     const formData = new FormData();
+
+    //     formData.append("thumbnail", file);
+
+    //     const upload$ = this.http.post("/api/thumbnail-upload", formData);
+
+    //     upload$.subscribe();
+    // }
 }
-
-  onFileSelected(event: any) {
-    console.log('file-upload');
-    const file: File = event.target.files[0];
-
-    if (file) {
-      this.fileName = file.name;
-
-      const formData = new FormData();
-
-      formData.append('thumbnail', file);
-
-      const upload$ = this.http.post('/api/thumbnail-upload', formData);
-
-      upload$.subscribe();
-    }
-  }
 }
