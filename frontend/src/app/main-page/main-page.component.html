@@ -1,20 +1,29 @@
 <div class="main-page">
   <div class="main-page_top-part">
     <div class="main-page_menu-container">
-      <button mat-raised-button color="accent" class="menu-button">
-        Browse input
-      </button>
-      <button mat-raised-button color="accent" class="menu-button">
+      <input
+        type="file"
+        class="file-input"
+        (change)="onFileSelected($event)"
+        #fileUpload
+      />
+      <button mat-raised-button color="accent" class="menu-button"  (change)="onFileSelected($event)">
         Tumor detection
       </button>
-      <button mat-raised-button color="accent" class="menu-button">
+      <button mat-raised-button color="accent" class="menu-button" (click)="resetButton()">
         Reset
       </button>
       <button mat-raised-button color="accent" class="menu-button">Exit</button>
     </div>
 
     <div class="main-page_photo-container">
-      <div class="first-photo">photo1</div>
+      <div  *ngIf="ImagePath === ''" class="first-photo">photo1</div>
+      <img
+      *ngIf="ImagePath !== ''"
+      [src]="ImagePath"
+      class="imageFirstContainer"
+      style="width: 300px; height: 300px"
+    />
       <div class="second-photo">photo2</div>
       <div class="third-photo">photo3</div>
     </div>
@@ -44,10 +53,4 @@
   </div>
 </div>
 
-<button
-  type="button"
-  class="btn btn-primary-outline pull-right"
-  (click)="navigateTo()"
->
-  <i class="fa fa-plus"></i> Add
-</button>
+<div class="imageHelp"></div>

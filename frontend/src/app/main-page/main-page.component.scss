@@ -32,6 +32,17 @@
   padding-top: $paddingTop;
 }
 
+.imageHelp {
+  background-image: url('../../images/test2.png');
+  background-image: url('../../images/rice.jpeg');
+  display: block;
+}
+
+.file-input {
+  font-weight: 600;
+  font-size: 16px;
+}
+
 .main-page {
   height: 100%;
   width: 100%;
@@ -53,16 +64,23 @@
       @include topContainers(flex, row, space-between, 1000px, 300px, 80px, 100px, 50px);
 
       .first-photo {
-        @include photo(1px, solid, balck, 100%, 50px);
+        @include photo(1px, solid, black, 100%, 50px);
       }
 
       .second-photo {
-        @include photo(1px, solid, balck, 100%, 50px);
+        @include photo(1px, solid, black, 100%, 50px);
       }
 
       .third-photo {
-        @include photo(1px, solid, balck, 100%, 0);
+        @include photo(1px, solid, black, 100%, 0);
       }
+
+      .imageFirstContainer {
+        width: 300px;
+        height: 300px;
+        margin-right: 50px;
+      }
+
     }
   }
 
