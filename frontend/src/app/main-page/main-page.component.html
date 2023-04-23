@@ -13,7 +13,7 @@
       <button mat-raised-button color="accent" class="menu-button" (click)="resetButton()">
         Reset
       </button>
-      <button mat-raised-button color="accent" class="menu-button">Exit</button>
+      <button mat-raised-button color="accent" class="menu-button" (click)="testButton()">Exit</button>
     </div>
 
     <div class="main-page_photo-container">
@@ -22,7 +22,6 @@
       *ngIf="ImagePath !== ''"
       [src]="ImagePath"
       class="imageFirstContainer"
-      style="width: 300px; height: 300px"
     />
       <div class="second-photo">photo2</div>
       <div class="third-photo">photo3</div>

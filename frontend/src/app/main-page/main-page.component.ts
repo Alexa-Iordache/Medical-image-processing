@@ -1,16 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { RpcService } from '../services/rpc.service';
+
+// const emp = test.getTest();
+
+
 
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.scss'],
 })
-export class MainPageComponent  {
+export class MainPageComponent {
   // panelOpenState = false;
   ImagePath = '';
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private rpcService: RpcService) {
     this.ImagePath = '';
   }
 
@@ -28,5 +33,24 @@ export class MainPageComponent  {
     this.ImagePath = '';
     console.log('reset button was clicked');
     console.log(this.ImagePath);
+  }
+
+  testButton(): void {
+    console.log('merge getTest');
+
+    let params = {
+      username: 'admin',
+    };
+
+    this.rpcService.callRPC('test.getTest', params, (err: any, res: any) => {
+      console.log('a intrat in main-page component ts');
+      if (err || res.error) {
+        console.log('nu s au putut afisa testul');
+        return;
+      } else {
+        console.log('merge getTest');
+        console.log(res.result);
+      }
+    });
   }
 }
