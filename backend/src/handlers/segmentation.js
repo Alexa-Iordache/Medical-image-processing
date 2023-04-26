@@ -4,8 +4,6 @@ const { stderr } = require("node:process");
 
 let segmentation = {
   imageSegmentation(req, res, next) {
-    console.log("text");
-
     exec("python3 src/handlers/script2.py", (error, stdout, stderr) => {
       console.log("error: " + error);
       console.log("stdout: " + stdout);
