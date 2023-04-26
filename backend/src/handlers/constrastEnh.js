@@ -1,9 +1,9 @@
 const { exec, spawn } = require("node:child_process");
 const { stderr } = require("node:process");
 
-let segmentation = {
-  imageSegmentation(req, res, next) {
-    exec("python3 src/handlers/segmentationCode.py", (error, stdout, stderr) => {
+let contrast = {
+  contrastEnhancement(req, res, next) {
+    exec("python3 src/handlers/contrastEnhCode.py", (error, stdout, stderr) => {
       console.log("error: " + error);
       console.log("stdout: " + stdout);
       console.log("stderr: " + stderr);
@@ -14,4 +14,4 @@ let segmentation = {
   },
 };
 
-module.exports = segmentation;
+module.exports = contrast;

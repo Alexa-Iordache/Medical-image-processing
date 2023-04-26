@@ -3,13 +3,13 @@
   $borderStyle,
   $borderColor,
   $width,
-  $marginRight
+  $marginLeft
 ) {
   border-width: $borderWidth;
   border-style: $borderStyle;
   border-color: $borderColor;
   width: $width;
-  margin-right: $marginRight;
+  margin-left: $marginLeft;
 }
 
 @mixin topContainers (
@@ -32,6 +32,16 @@
   padding-top: $paddingTop;
 }
 
+.imageHelp {
+  background-image: url('../../images/test2.png');
+  background-image: url('../../images/rice.jpeg');
+  background-image: url('../../../../backend/src/processImages/riceProcessed.png');
+  background-image: url('../../../../backend/src/processImages/brightnessEnh.png');
+  background-image: url('../../../../backend/src/processImages/contrastEnh.png');
+  background-image: url('../../../../backend/src/processImages/sharpnessEnh.png');
+  display: block;
+}
+
 .file-input {
   font-weight: 600;
   font-size: 16px;
@@ -47,33 +57,58 @@
     flex-direction: row;
 
     .main-page_menu-container {
-      @include topContainers(flex, column, space-between, 250px, 300px, 100px, 0, 50px);
+      @include topContainers(flex, column, space-between, 250px, auto, 100px, 0, 50px);
 
       .menu-button {
         height: 60px;
+        margin-top: 10px
       }
     }
 
     .main-page_photo-container {
       @include topContainers(flex, row, space-between, 1000px, 300px, 80px, 100px, 50px);
 
-      .first-photo {
-        @include photo(1px, solid, black, 100%, 50px);
-      }
-
-      .second-photo {
-        @include photo(1px, solid, black, 100%, 50px);
-      }
-
-      .third-photo {
-        @include photo(1px, solid, black, 100%, 0);
-      }
-
       .imageContainer {
-        width: 300px;
-        height: 300px;
-        margin-right: 50px;
+        @include photo(1px, solid, black, 100%, 30px);
+        margin-top: 50px
       }
+
+      .title-and-photo {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 80px;
+
+        .image-title {
+          font-family: 'Inter';
+          font-size: 16px;
+          font-weight: 12px;
+          margin-bottom: 10px;
+        }
+
+        .photoDisplayed {
+          width: 300px;
+          height: 300px;
+          margin-right: 50px;
+        }
+      }
+
+
+      // .first-photo {
+      //   @include photo(1px, solid, black, 100%, 50px);
+      //   margin-top: 10px
+      // }
+
+      // .second-photo {
+      //   @include photo(1px, solid, black, 100%, 50px);
+      //   margin-top: 10px;
+      // }
+
+      // .imageContainer {
+      //   width: 300px;
+      //   height: 300px;
+      //   margin-right: 50px;
+      // }
 
     }
   }

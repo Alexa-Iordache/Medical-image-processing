@@ -7,30 +7,98 @@
         (change)="onFileSelected($event)"
         #fileUpload
       />
-      <button mat-raised-button color="accent" class="menu-button" (click)="imageSegmentation($event)">
+      <button
+        mat-raised-button
+        color="accent"
+        class="menu-button"
+        (click)="imageSegmentation($event)"
+      >
         Image Segmentation
       </button>
-      <button mat-raised-button color="accent" class="menu-button" (click)="resetButton()">
+      <button
+        mat-raised-button
+        color="accent"
+        class="menu-button"
+        (click)="brightnessEnhancement($event)"
+      >
+        Brightness Enhancement
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        class="menu-button"
+        (click)="contrastEnhancement($event)"
+      >
+        Contrast Enhancement
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        class="menu-button"
+        (click)="sharpnessEnhancement($event)"
+      >
+        Sharpness Enhancement
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        class="menu-button"
+        (click)="resetButton()"
+      >
         Reset
       </button>
       <button mat-raised-button color="accent" class="menu-button">Exit</button>
     </div>
 
     <div class="main-page_photo-container">
-      <div  *ngIf="originalImagePath === ''" class="first-photo">photo1</div>
-      <img
-      *ngIf="originalImagePath !== ''"
-      src={{originalImagePath}}
-      class="imageContainer"
-    />
-      <div   *ngIf="imageSegmentationPath === ''" class="second-photo">photo2</div>
-      <img
-      *ngIf="imageSegmentationPath !== ''"
-      src={{imageSegmentationPath}}
-      alt="image"
-      class="imageContainer"
-    />
-      <div class="third-photo">photo3</div>
+      <div *ngIf="originalImagePath === ''" class="imageContainer">photo1</div>
+
+      <div *ngIf="originalImagePath !== ''" class="title-and-photo">
+        <div class="image-title">Original image:</div>
+        <img src="{{ originalImagePath }}" class="photoDisplayed" />
+      </div>
+
+      <div
+        *ngIf="
+          imageSegmentationPath === '' &&
+          imgBrightnessEnhPath === '' &&
+          imgContrastEnhPath === ''
+        "
+        class="imageContainer"
+      >
+        photo2
+      </div>
+
+      <div *ngIf="imageSegmentationPath !== ''" class="title-and-photo">
+        <div class="image-title">Image after segmentation process:</div>
+        <img src="{{ imageSegmentationPath }}" class="photoDisplayed" />
+      </div>
+
+      <div
+        *ngIf="imgBrightnessEnhPath !== '' && imgContrastEnhPath === '' && imgSharpnessEnhPath === ''"
+        class="title-and-photo"
+      >
+        <div class="image-title">
+          Image after brightness enhancement process:
+        </div>
+        <img src="{{ imgBrightnessEnhPath }}" class="photoDisplayed" />
+      </div>
+
+      <div
+        *ngIf="imgContrastEnhPath !== '' && imgBrightnessEnhPath === '' && imgSharpnessEnhPath === ''"
+        class="title-and-photo"
+      >
+        <div class="image-title">Image after contrast enhancement process:</div>
+        <img src="{{ imgContrastEnhPath }}" class="photoDisplayed" />
+      </div>
+
+      <div
+        *ngIf="imgSharpnessEnhPath !== '' && imgBrightnessEnhPath === '' && imgContrastEnhPath === ''"
+        class="title-and-photo"
+      >
+        <div class="image-title">Image after sharpness enhancement process:</div>
+        <img src="{{ imgSharpnessEnhPath }}" class="photoDisplayed" />
+      </div>
     </div>
   </div>
 
