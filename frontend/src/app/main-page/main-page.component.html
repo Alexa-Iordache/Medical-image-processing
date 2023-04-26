@@ -7,26 +7,26 @@
         (change)="onFileSelected($event)"
         #fileUpload
       />
-      <button mat-raised-button color="accent" class="menu-button" (click)="uploadImage()">
-        Tumor detection
+      <button mat-raised-button color="accent" class="menu-button" (click)="imageSegmentation($event)">
+        Image Segmentation
       </button>
       <button mat-raised-button color="accent" class="menu-button" (click)="resetButton()">
         Reset
       </button>
-      <button mat-raised-button color="accent" class="menu-button" (click)="buttonExit()">Exit</button>
+      <button mat-raised-button color="accent" class="menu-button">Exit</button>
     </div>
 
     <div class="main-page_photo-container">
-      <div  *ngIf="ImagePath === ''" class="first-photo">photo1</div>
+      <div  *ngIf="originalImagePath === ''" class="first-photo">photo1</div>
       <img
-      *ngIf="ImagePath !== ''"
-      src={{ImagePath}}
+      *ngIf="originalImagePath !== ''"
+      src={{originalImagePath}}
       class="imageContainer"
     />
-      <div  *ngIf="segmentationProcessDone == false" class="second-photo">photo2</div>
+      <div   *ngIf="imageSegmentationPath === ''" class="second-photo">photo2</div>
       <img
-      *ngIf="segmentationProcessDone == true"
-      src={{imagepath}}
+      *ngIf="imageSegmentationPath !== ''"
+      src={{imageSegmentationPath}}
       alt="image"
       class="imageContainer"
     />
@@ -57,6 +57,3 @@
     </button>
   </div>
 </div>
-<div class="imageHelp"></div>
-
-<div [style.background-image]="'url(' + imagepath + ')'" class="image-container"></div>

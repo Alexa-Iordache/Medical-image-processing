@@ -1,7 +1,6 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { RpcService } from '../services/rpc.service';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-main-page',
@@ -9,15 +8,12 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./main-page.component.scss'],
 })
 export class MainPageComponent {
-  ImagePath = '';
-  segmentationProcessDone = false;
-  imagepath = '';
+  originalImagePath = '';
+  imageSegmentationPath = '';
 
   constructor(
     private router: Router,
     private rpcService: RpcService,
-    private http: HttpClient,
-    private el: ElementRef
   ) {
     // this.ImagePath = '';
     // this.imagepath = '';
@@ -31,20 +27,20 @@ export class MainPageComponent {
     event.stopPropagation();
     const file: File = event.target.files[0];
     console.log(file.name);
-    this.ImagePath = file.name;
+    this.originalImagePath = file.name;
   }
 
   resetButton() {
-    this.ImagePath = '';
-    console.log('reset button was clicked');
-    console.log(this.ImagePath);
+    this.originalImagePath = '';
+    this.imageSegmentationPath = '';
   }
 
-  uploadImage(): void {
-    console.log(this.ImagePath);
+  ceva(): void {
+    console.log('macar aici nu');
   }
 
-  buttonExit(): void {
+  imageSegmentation(event: any): void {
+    event.preventDefault();
     console.log('s a apasat butonul de exit');
     let params = {
       username: 'admin',
@@ -54,13 +50,13 @@ export class MainPageComponent {
       'segmentation.imageSegmentation',
       params,
       (err: any, res: any) => {
-        console.log('a mers segmentarea');
         if (err || res.error) {
-          console.log('nu s-a putut realiza segmentarea');
+          console.log('segmentation does NOT work');
           return;
         } else {
-          this.segmentationProcessDone = true;
-          this.imagepath = res.result;
+          event.preventDefault();
+          console.log('segmentation works');
+          this.imageSegmentationPath = res.result;
         }
       }
     );
