@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 # Load the image
-img = cv2.imread('./processImages/rice.jpeg')
+img = cv2.imread('./src/processImages/rice.jpeg')
 
 # Convert the image to grayscale
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -27,6 +27,6 @@ for cnt in contours:
 # Apply the mask to the original image
 result = cv2.bitwise_and(img, img, mask=mask)
 
-cv2.imwrite('./processImages/segmentedImage.png', result)
+cv2.imwrite('./src/processImages/segmentedImage.png', result)
 
 

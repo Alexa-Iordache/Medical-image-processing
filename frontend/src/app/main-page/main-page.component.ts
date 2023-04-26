@@ -2,10 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RpcService } from '../services/rpc.service';
 
-// const emp = test.getTest();
-
-
-
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
@@ -35,22 +31,38 @@ export class MainPageComponent {
     console.log(this.ImagePath);
   }
 
-  testButton(): void {
-    console.log('merge getTest');
+  // testButton(): void {
+  //   console.log('merge getTest');
 
+  //   let params = {
+  //     username: 'admin',
+  //   };
+
+  //   this.rpcService.callRPC('test.getTest', params, (err: any, res: any) => {
+  //     console.log('a intrat in main-page component ts');
+  //     if (err || res.error) {
+  //       console.log('nu s au putut afisa testul');
+  //       return;
+  //     } else {
+  //       console.log('merge getTest');
+  //       console.log(res.result);
+  //     }
+  //   });
+  // }
+
+  buttonExit(): void {
+    console.log('s a apasat butonul de exit');
     let params = {
-      username: 'admin',
-    };
+      "username": 'admin'
+    }
 
-    this.rpcService.callRPC('test.getTest', params, (err: any, res: any) => {
-      console.log('a intrat in main-page component ts');
+    this.rpcService.callRPC('segmentation.imageSegmentation', params, (err: any, res: any) => {
+      console.log('a mers segmentarea');
       if (err || res.error) {
-        console.log('nu s au putut afisa testul');
+        console.log('nu s-a putut realiza segmentarea');
         return;
-      } else {
-        console.log('merge getTest');
-        console.log(res.result);
       }
     });
   }
+
 }

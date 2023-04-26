@@ -1,4 +1,4 @@
 module.exports = {
     auth: require("./auth"),
-    test: require("./test")
+    segmentation: require("./segmentation")
 };
