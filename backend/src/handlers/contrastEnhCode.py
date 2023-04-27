@@ -4,7 +4,7 @@ import numpy as np
 def contrastEnhProcess():
 
     # Load the image
-    img = cv2.imread('./src/processImages/rice.jpeg')
+    img = cv2.imread('./src/processImages/tumor.jpeg')
 
     # Convert the image to grayscale
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)

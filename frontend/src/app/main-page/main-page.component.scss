@@ -35,10 +35,12 @@
 .imageHelp {
   background-image: url('../../images/test2.png');
   background-image: url('../../images/rice.jpeg');
-  background-image: url('../../../../backend/src/processImages/riceProcessed.png');
+  background-image: url('../../../../backend/src/processImages/tumor.jpeg');
+  background-image: url('../../../../backend/src/processImages/imageSegmentated.png');
   background-image: url('../../../../backend/src/processImages/brightnessEnh.png');
   background-image: url('../../../../backend/src/processImages/contrastEnh.png');
   background-image: url('../../../../backend/src/processImages/sharpnessEnh.png');
+  background-image: url('../../../../backend/src/processImages/tumorDetected.png');
   display: block;
 }
 

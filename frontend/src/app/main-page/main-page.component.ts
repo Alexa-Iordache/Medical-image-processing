@@ -11,8 +11,8 @@ export class MainPageComponent {
   originalImagePath = '';
   imageSegmentationPath = '';
   imgBrightnessEnhPath = '';
-  imgContrastEnhPath = '';
   imgSharpnessEnhPath = '';
+  imgTumorDetectedPath = '';
 
   constructor(
     private router: Router,
@@ -39,8 +39,8 @@ export class MainPageComponent {
     this.originalImagePath = '';
     this.imageSegmentationPath = '';
     this.imgBrightnessEnhPath = '';
-    this.imgContrastEnhPath = '';
     this.imgSharpnessEnhPath = '';
+    this.imgTumorDetectedPath = '';
   }
 
   // process for image segmentation
@@ -70,7 +70,6 @@ export class MainPageComponent {
   // process for image brightness enhancement
   brightnessEnhancement(event: any): void {
     event.preventDefault();
-    this.imgContrastEnhPath = '';
     this.imgSharpnessEnhPath = '';
     console.log('brightness enhancement button clicked');
     let params = {
@@ -93,38 +92,36 @@ export class MainPageComponent {
     );
   }
 
-   // process for image contrast enhancement
-   contrastEnhancement(event: any): void {
-    event.preventDefault();
-    this.imgBrightnessEnhPath = '';
-    this.imgSharpnessEnhPath = '';
-    console.log('contrast enhancement button clicked');
-    let params = {
-      username: 'admin',
-    };
+  //  // process for image contrast enhancement
+  //  contrastEnhancement(event: any): void {
+  //   event.preventDefault();
+  //   this.imgBrightnessEnhPath = '';
+  //   this.imgSharpnessEnhPath = '';
+  //   console.log('contrast enhancement button clicked');
+  //   let params = {
+  //     username: 'admin',
+  //   };
 
-    this.rpcService.callRPC(
-      'contrast.contrastEnhancement',
-      params,
-      (err: any, res: any) => {
-        if (err || res.error) {
-          console.log('contrast enhancement does NOT work');
-          return;
-        } else {
-          event.preventDefault();
-          console.log('contrst enhancement works');
-          this.imgContrastEnhPath = res.result;
-        }
-      }
-    );
-  }
-  // sharpnessEnhancement
+  //   this.rpcService.callRPC(
+  //     'contrast.contrastEnhancement',
+  //     params,
+  //     (err: any, res: any) => {
+  //       if (err || res.error) {
+  //         console.log('contrast enhancement does NOT work');
+  //         return;
+  //       } else {
+  //         event.preventDefault();
+  //         console.log('contrst enhancement works');
+  //         this.imgContrastEnhPath = res.result;
+  //       }
+  //     }
+  //   );
+  // }
 
   // process for image sharpness enhancement
   sharpnessEnhancement(event: any): void {
     event.preventDefault();
     this.imgBrightnessEnhPath = '';
-    this.imgContrastEnhPath = '';
     console.log('sharpness enhancement button clicked');
     let params = {
       username: 'admin',
@@ -144,5 +141,37 @@ export class MainPageComponent {
         }
       }
     );
+  }
+
+  // tumor detection function
+  tumorDetection(event: any): void {
+    event.preventDefault();
+    this.imgBrightnessEnhPath = '';
+    this.imageSegmentationPath = '';
+    console.log('tumor detection button clicked');
+    let params = {
+      username: 'admin',
+    };
+
+    this.rpcService.callRPC(
+      'tumorDetection.tumorDetectionProcess',
+      params,
+      (err: any, res: any) => {
+        if (err || res.error) {
+          console.log('tumor detection does NOT work');
+          return;
+        } else {
+          event.preventDefault();
+          console.log('tumor detection works');
+          this.imgTumorDetectedPath = res.result;
+        }
+      }
+    );
+  }
+
+  // exit function - returns to login page
+  exitButton(): void {
+    let copyInstance = this; // a copy of this class (atributes + methods)
+    copyInstance.router.navigate(['/login']);
   }
 }

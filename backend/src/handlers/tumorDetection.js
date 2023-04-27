@@ -1,9 +1,9 @@
 const { exec, spawn } = require("node:child_process");
 const { stderr } = require("node:process");
 
-let brightness = {
-  brightnessEnhancement(req, res, next) {
-    exec("python3 src/handlers/brigtnessEnhCode.py", (error, stdout, stderr) => {
+let tumorDetection = {
+  tumorDetectionProcess(req, res, next) {
+    exec("python3 src/handlers/tumorDetectionCode.py", (error, stdout, stderr) => {
       console.log("error: " + error);
       console.log("stdout: " + stdout);
       console.log("stderr: " + stderr);
@@ -14,4 +14,4 @@ let brightness = {
   },
 };
 
-module.exports = brightness;
+module.exports = tumorDetection;

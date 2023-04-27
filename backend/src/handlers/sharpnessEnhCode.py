@@ -4,7 +4,7 @@ import numpy as np
 def sharpnessEnhProcess():
 
     # Load the image
-    img = cv2.imread('./src/processImages/rice.jpeg')
+    img = cv2.imread('./src/processImages/tumor.jpeg')
 
     # Create a sharpening kernel
     kernel = np.array([[-1,-1,-1], [-1,9,-1], [-1,-1,-1]])

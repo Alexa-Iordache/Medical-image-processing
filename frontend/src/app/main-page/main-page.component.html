@@ -21,15 +21,7 @@
         class="menu-button"
         (click)="brightnessEnhancement($event)"
       >
-        Brightness Enhancement
-      </button>
-      <button
-        mat-raised-button
-        color="accent"
-        class="menu-button"
-        (click)="contrastEnhancement($event)"
-      >
-        Contrast Enhancement
+        Brightness & Contrast Enhancement
       </button>
       <button
         mat-raised-button
@@ -43,11 +35,19 @@
         mat-raised-button
         color="accent"
         class="menu-button"
+        (click)="tumorDetection($event)"
+      >
+        Tumor Detection
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        class="menu-button"
         (click)="resetButton()"
       >
         Reset
       </button>
-      <button mat-raised-button color="accent" class="menu-button">Exit</button>
+      <button mat-raised-button color="accent" class="menu-button" (click)="exitButton()">Exit</button>
     </div>
 
     <div class="main-page_photo-container">
@@ -59,11 +59,7 @@
       </div>
 
       <div
-        *ngIf="
-          imageSegmentationPath === '' &&
-          imgBrightnessEnhPath === '' &&
-          imgContrastEnhPath === ''
-        "
+        *ngIf="imageSegmentationPath === '' && imgBrightnessEnhPath === '' && imgTumorDetectedPath === ''"
         class="imageContainer"
       >
         photo2
@@ -75,7 +71,7 @@
       </div>
 
       <div
-        *ngIf="imgBrightnessEnhPath !== '' && imgContrastEnhPath === '' && imgSharpnessEnhPath === ''"
+        *ngIf="imgBrightnessEnhPath !== '' && imgSharpnessEnhPath === ''"
         class="title-and-photo"
       >
         <div class="image-title">
@@ -83,21 +79,24 @@
         </div>
         <img src="{{ imgBrightnessEnhPath }}" class="photoDisplayed" />
       </div>
-
       <div
-        *ngIf="imgContrastEnhPath !== '' && imgBrightnessEnhPath === '' && imgSharpnessEnhPath === ''"
+        *ngIf="imgSharpnessEnhPath !== '' && imgBrightnessEnhPath === ''"
         class="title-and-photo"
       >
-        <div class="image-title">Image after contrast enhancement process:</div>
-        <img src="{{ imgContrastEnhPath }}" class="photoDisplayed" />
+        <div class="image-title">
+          Image after sharpness enhancement process:
+        </div>
+        <img src="{{ imgSharpnessEnhPath }}" class="photoDisplayed" />
       </div>
 
       <div
-        *ngIf="imgSharpnessEnhPath !== '' && imgBrightnessEnhPath === '' && imgContrastEnhPath === ''"
+        *ngIf="imgTumorDetectedPath !== '' && imgBrightnessEnhPath === '' && imageSegmentationPath === ''"
         class="title-and-photo"
       >
-        <div class="image-title">Image after sharpness enhancement process:</div>
-        <img src="{{ imgSharpnessEnhPath }}" class="photoDisplayed" />
+        <div class="image-title">
+          Tumor detected:
+        </div>
+        <img src="{{ imgTumorDetectedPath }}" class="photoDisplayed" />
       </div>
     </div>
   </div>

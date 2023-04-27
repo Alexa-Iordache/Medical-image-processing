@@ -3,17 +3,20 @@ import numpy as np
 
 def brightnessEnhProcess():
 
-    # Open the image
-    img = cv2.imread('./src/processImages/rice.jpeg')
+    # Load the image
+    img = cv2.imread('./src/processImages/tumor.jpeg')
 
-    # Define a scalar value to increase the brightness
+    # Define the brightness and contrast values
     brightness = 50
+    contrast = 1.5
 
-    # Add the brightness to the image
-    brightened = cv2.add(img, brightness)
+    # Apply brightness and contrast adjustments
+    adjusted = np.int16(img)
+    adjusted = adjusted * contrast + brightness
+    adjusted = np.clip(adjusted, 0, 255)
+    adjusted = np.uint8(adjusted)
 
-    # Display the original and brightened images
-    cv2.imwrite('./src/processImages/brightnessEnh.png', brightened)
+    cv2.imwrite('./src/processImages/brightnessEnh.png', adjusted)
 
     return '/brightnessEnh.png'
     

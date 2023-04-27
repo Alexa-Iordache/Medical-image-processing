@@ -3,7 +3,7 @@ import numpy as np
 
 def segmentationProcess():
     # Load the image
-    img = cv2.imread('./src/processImages/rice.jpeg')
+    img = cv2.imread('./src/processImages/tumor.jpeg')
 
     # Convert the image to grayscale
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -28,8 +28,8 @@ def segmentationProcess():
     # Apply the mask to the original image
     result = cv2.bitwise_and(img, img, mask=mask)
 
-    cv2.imwrite('./src/processImages/riceProcessed.png', result)
+    cv2.imwrite('./src/processImages/imageSegmentated.png', result)
 
-    return '/riceProcessed.png'
+    return './imageSegmentated.png'
 
 print (segmentationProcess())
