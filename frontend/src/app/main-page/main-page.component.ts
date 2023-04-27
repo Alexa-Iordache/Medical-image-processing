@@ -12,12 +12,12 @@ export class MainPageComponent {
   imageSegmentationPath = '';
   imgBrightnessEnhPath = '';
   imgSharpnessEnhPath = '';
-  imgTumorDetectedPath = '';
+  // imgTumorDetectedPath = '';
+  hasTumor = false;
+  resultAfterProcessing = 0;
+  resultButtonClicked = false;
 
-  constructor(
-    private router: Router,
-    private rpcService: RpcService,
-  ) {
+  constructor(private router: Router, private rpcService: RpcService) {
     // this.ImagePath = '';
     // this.imagepath = '';
   }
@@ -40,7 +40,7 @@ export class MainPageComponent {
     this.imageSegmentationPath = '';
     this.imgBrightnessEnhPath = '';
     this.imgSharpnessEnhPath = '';
-    this.imgTumorDetectedPath = '';
+    // this.imgTumorDetectedPath = '';
   }
 
   // process for image segmentation
@@ -144,14 +144,13 @@ export class MainPageComponent {
   }
 
   // tumor detection function
-  tumorDetection(event: any): void {
-    event.preventDefault();
-    this.imgBrightnessEnhPath = '';
-    this.imageSegmentationPath = '';
+  showResults(): void {
     console.log('tumor detection button clicked');
     let params = {
       username: 'admin',
     };
+
+    this.resultButtonClicked = true;
 
     this.rpcService.callRPC(
       'tumorDetection.tumorDetectionProcess',
@@ -161,9 +160,10 @@ export class MainPageComponent {
           console.log('tumor detection does NOT work');
           return;
         } else {
-          event.preventDefault();
           console.log('tumor detection works');
-          this.imgTumorDetectedPath = res.result;
+          this.resultAfterProcessing = res.result;
+          console.log(this.resultAfterProcessing);
+          if (this.resultAfterProcessing > 1000) this.hasTumor = true;
         }
       }
     );

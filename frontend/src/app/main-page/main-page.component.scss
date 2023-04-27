@@ -1,10 +1,4 @@
-@mixin photo(
-  $borderWidth,
-  $borderStyle,
-  $borderColor,
-  $width,
-  $marginLeft
-) {
+@mixin photo($borderWidth, $borderStyle, $borderColor, $width, $marginLeft) {
   border-width: $borderWidth;
   border-style: $borderStyle;
   border-color: $borderColor;
@@ -12,7 +6,7 @@
   margin-left: $marginLeft;
 }
 
-@mixin topContainers (
+@mixin topContainers(
   $display,
   $flexDirection,
   $justifyContent,
@@ -33,14 +27,14 @@
 }
 
 .imageHelp {
-  background-image: url('../../images/test2.png');
-  background-image: url('../../images/rice.jpeg');
-  background-image: url('../../../../backend/src/processImages/tumor.jpeg');
-  background-image: url('../../../../backend/src/processImages/imageSegmentated.png');
-  background-image: url('../../../../backend/src/processImages/brightnessEnh.png');
-  background-image: url('../../../../backend/src/processImages/contrastEnh.png');
-  background-image: url('../../../../backend/src/processImages/sharpnessEnh.png');
-  background-image: url('../../../../backend/src/processImages/tumorDetected.png');
+  background-image: url("../../images/test2.png");
+  background-image: url("../../images/rice.jpeg");
+  background-image: url("../../../../backend/src/processImages/tumor.jpeg");
+  background-image: url("../../../../backend/src/processImages/imageSegmentated.png");
+  background-image: url("../../../../backend/src/processImages/brightnessEnh.png");
+  background-image: url("../../../../backend/src/processImages/contrastEnh.png");
+  background-image: url("../../../../backend/src/processImages/sharpnessEnh.png");
+  background-image: url("../../../../backend/src/processImages/tumorDetected.png");
   display: block;
 }
 
@@ -59,20 +53,38 @@
     flex-direction: row;
 
     .main-page_menu-container {
-      @include topContainers(flex, column, space-between, 250px, auto, 100px, 0, 50px);
+      @include topContainers(
+        flex,
+        column,
+        space-between,
+        250px,
+        auto,
+        100px,
+        0,
+        50px
+      );
 
       .menu-button {
         height: 60px;
-        margin-top: 10px
+        margin-top: 10px;
       }
     }
 
     .main-page_photo-container {
-      @include topContainers(flex, row, space-between, 1000px, 300px, 80px, 100px, 50px);
+      @include topContainers(
+        flex,
+        row,
+        space-between,
+        1000px,
+        300px,
+        80px,
+        100px,
+        50px
+      );
 
       .imageContainer {
         @include photo(1px, solid, black, 100%, 30px);
-        margin-top: 50px
+        margin-top: 50px;
       }
 
       .title-and-photo {
@@ -82,7 +94,7 @@
         margin-top: 80px;
 
         .image-title {
-          font-family: 'Inter';
+          font-family: "Inter";
           font-size: 16px;
           font-weight: 12px;
           margin-bottom: 10px;
@@ -94,7 +106,6 @@
           margin-right: 50px;
         }
       }
-
 
       // .first-photo {
       //   @include photo(1px, solid, black, 100%, 50px);
@@ -111,7 +122,6 @@
       //   height: 300px;
       //   margin-right: 50px;
       // }
-
     }
   }
 
@@ -128,5 +138,33 @@
     .result-button {
       margin-top: 50px;
     }
+  }
+
+  .result_container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+  }
+
+  .result_title {
+    font-family: "Inter";
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .positive_result {
+    font-family: "Inter";
+    font-size: 20px;
+    font-weight: 600;
+    color: red;
+    margin-left: 20px;
+  }
+
+  .negative_result {
+    font-family: "Inter";
+    font-size: 20px;
+    font-weight: 600;
+    color: green;
+    margin-left: 20px;
   }
 }

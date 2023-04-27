@@ -35,19 +35,18 @@
         mat-raised-button
         color="accent"
         class="menu-button"
-        (click)="tumorDetection($event)"
+        (click)="resetButton()"
       >
-        Tumor Detection
+        Reset
       </button>
       <button
         mat-raised-button
         color="accent"
         class="menu-button"
-        (click)="resetButton()"
+        (click)="exitButton()"
       >
-        Reset
+        Exit
       </button>
-      <button mat-raised-button color="accent" class="menu-button" (click)="exitButton()">Exit</button>
     </div>
 
     <div class="main-page_photo-container">
@@ -59,7 +58,7 @@
       </div>
 
       <div
-        *ngIf="imageSegmentationPath === '' && imgBrightnessEnhPath === '' && imgTumorDetectedPath === ''"
+        *ngIf="imageSegmentationPath === '' && imgBrightnessEnhPath === ''"
         class="imageContainer"
       >
         photo2
@@ -88,16 +87,6 @@
         </div>
         <img src="{{ imgSharpnessEnhPath }}" class="photoDisplayed" />
       </div>
-
-      <div
-        *ngIf="imgTumorDetectedPath !== '' && imgBrightnessEnhPath === '' && imageSegmentationPath === ''"
-        class="title-and-photo"
-      >
-        <div class="image-title">
-          Tumor detected:
-        </div>
-        <img src="{{ imgTumorDetectedPath }}" class="photoDisplayed" />
-      </div>
     </div>
   </div>
 
@@ -119,8 +108,28 @@
       </mat-accordion>
     </div>
 
-    <button mat-raised-button color="warn" class="result-button">
+    <button
+      mat-raised-button
+      color="warn"
+      class="result-button"
+      (click)="showResults()"
+    >
       Show result
     </button>
+    <div class="result_container">
+      <div class="result_title">RESULT:</div>
+      <div
+        *ngIf="hasTumor == true && resultButtonClicked == true"
+        class="positive_result"
+      >
+        tumor detected
+      </div>
+      <div
+        *ngIf="hasTumor == false && resultButtonClicked == true"
+        class="negative_result"
+      >
+        tumor is not detected
+      </div>
+    </div>
   </div>
 </div>

@@ -31,6 +31,6 @@ def tumordDetectionProcess():
     # Display the final image
     cv2.imwrite('./src/processImages/tumorDetected.png', image)
 
-    return '/tumorDetected.png'
+    return total_area
     
 print (tumordDetectionProcess())
