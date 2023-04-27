@@ -3,7 +3,7 @@ const { stderr } = require("node:process");
 
 let sharpness = {
   sharpnessEnhancement(req, res, next) {
-    exec("python3 src/handlers/sharpnessEnhCode.py", (error, stdout, stderr) => {
+    exec("python3 src/handlers/sharpnessEnhCode.py --imagePath './src/processImages/tumor.jpeg'", (error, stdout, stderr) => {
       console.log("error: " + error);
       console.log("stdout: " + stdout);
       console.log("stderr: " + stderr);

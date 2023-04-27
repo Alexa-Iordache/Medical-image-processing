@@ -1,9 +1,11 @@
 import cv2
 import numpy as np
+import argparse
 
-def segmentationProcess():
+# imagePath = './src/processImages/tumor.jpeg'
+def segmentationProcess(imagePath):
     # Load the image
-    img = cv2.imread('./src/processImages/tumor.jpeg')
+    img = cv2.imread(imagePath)
 
     # Convert the image to grayscale
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -30,6 +32,17 @@ def segmentationProcess():
 
     cv2.imwrite('./src/processImages/imageSegmentated.png', result)
 
-    return './imageSegmentated.png'
+    return '/imageSegmentated.png'
 
-print (segmentationProcess())
+# print (segmentationProcess())
+
+if __name__ == '__main__':
+    # Define the command line arguments
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--imagePath', type=str, help='The first parameter')
+
+    # Parse the command line arguments
+    args = parser.parse_args()
+
+    # Call the function with the parsed parameters
+    print(segmentationProcess(args.imagePath))

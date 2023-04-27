@@ -61,6 +61,7 @@ export class MainPageComponent {
         } else {
           event.preventDefault();
           console.log('segmentation works');
+          console.log(res.result);
           this.imageSegmentationPath = res.result;
         }
       }
@@ -86,6 +87,7 @@ export class MainPageComponent {
         } else {
           event.preventDefault();
           console.log('brightness enhancement works');
+          console.log(res.result);
           this.imgBrightnessEnhPath = res.result;
         }
       }
