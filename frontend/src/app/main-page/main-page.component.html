@@ -11,7 +11,7 @@
         mat-raised-button
         color="accent"
         class="menu-button"
-        (click)="imageSegmentation($event)"
+        (click)="imageSegmentation(originalImagePath)"
       >
         Image Segmentation
       </button>
@@ -19,7 +19,7 @@
         mat-raised-button
         color="accent"
         class="menu-button"
-        (click)="brightnessEnhancement($event)"
+        (click)="brightnessEnhancement(originalImagePath)"
       >
         Brightness & Contrast Enhancement
       </button>
@@ -27,7 +27,7 @@
         mat-raised-button
         color="accent"
         class="menu-button"
-        (click)="sharpnessEnhancement($event)"
+        (click)="sharpnessEnhancement(originalImagePath)"
       >
         Sharpness Enhancement
       </button>

@@ -12,19 +12,11 @@ export class MainPageComponent {
   imageSegmentationPath = '';
   imgBrightnessEnhPath = '';
   imgSharpnessEnhPath = '';
-  // imgTumorDetectedPath = '';
-  hasTumor = false;
-  resultAfterProcessing = 0;
-  resultButtonClicked = false;
+  hasTumor = false; // are tumoare sau nu
+  resultAfterProcessing = 0; // procentul de contor dupa procesarea imaginii
+  resultButtonClicked = false; // s a apasat pe butonul de rezultat sau nu
 
-  constructor(private router: Router, private rpcService: RpcService) {
-    // this.ImagePath = '';
-    // this.imagepath = '';
-  }
-
-  // navigateTo(): void {
-  //   this.router.navigate(['/upload']);
-  // }
+  constructor(private router: Router, private rpcService: RpcService) {}
 
   // uploading an image
   onFileSelected(event: any) {
@@ -32,6 +24,9 @@ export class MainPageComponent {
     const file: File = event.target.files[0];
     console.log(file.name);
     this.originalImagePath = file.name;
+    this.imageSegmentationPath = ''
+    this.imgBrightnessEnhPath = ''
+    this.imgSharpnessEnhPath = ''
   }
 
   // reseting images -> in order to process another image
@@ -40,16 +35,17 @@ export class MainPageComponent {
     this.imageSegmentationPath = '';
     this.imgBrightnessEnhPath = '';
     this.imgSharpnessEnhPath = '';
-    // this.imgTumorDetectedPath = '';
+    this.resultButtonClicked = false;
   }
 
   // process for image segmentation
-  imageSegmentation(event: any): void {
-    event.preventDefault();
+  imageSegmentation(imagepath: string): void {
+    // event.preventDefault();
     console.log('image segmentation button clicked');
     let params = {
-      username: 'admin',
+      imagepath: this.originalImagePath
     };
+    // console.log(params.imagepath);
 
     this.rpcService.callRPC(
       'segmentation.imageSegmentation',
@@ -59,9 +55,8 @@ export class MainPageComponent {
           console.log('segmentation does NOT work');
           return;
         } else {
-          event.preventDefault();
+          // event.preventDefault();
           console.log('segmentation works');
-          console.log(res.result);
           this.imageSegmentationPath = res.result;
         }
       }
@@ -69,12 +64,13 @@ export class MainPageComponent {
   }
 
   // process for image brightness enhancement
-  brightnessEnhancement(event: any): void {
-    event.preventDefault();
+  brightnessEnhancement(imagepath: string): void {
+    // event.preventDefault();
     this.imgSharpnessEnhPath = '';
     console.log('brightness enhancement button clicked');
+
     let params = {
-      username: 'admin',
+      imagepath: this.originalImagePath
     };
 
     this.rpcService.callRPC(
@@ -85,7 +81,7 @@ export class MainPageComponent {
           console.log('brightness enhancement does NOT work');
           return;
         } else {
-          event.preventDefault();
+          // event.preventDefault();
           console.log('brightness enhancement works');
           console.log(res.result);
           this.imgBrightnessEnhPath = res.result;
@@ -94,39 +90,14 @@ export class MainPageComponent {
     );
   }
 
-  //  // process for image contrast enhancement
-  //  contrastEnhancement(event: any): void {
-  //   event.preventDefault();
-  //   this.imgBrightnessEnhPath = '';
-  //   this.imgSharpnessEnhPath = '';
-  //   console.log('contrast enhancement button clicked');
-  //   let params = {
-  //     username: 'admin',
-  //   };
-
-  //   this.rpcService.callRPC(
-  //     'contrast.contrastEnhancement',
-  //     params,
-  //     (err: any, res: any) => {
-  //       if (err || res.error) {
-  //         console.log('contrast enhancement does NOT work');
-  //         return;
-  //       } else {
-  //         event.preventDefault();
-  //         console.log('contrst enhancement works');
-  //         this.imgContrastEnhPath = res.result;
-  //       }
-  //     }
-  //   );
-  // }
-
   // process for image sharpness enhancement
-  sharpnessEnhancement(event: any): void {
-    event.preventDefault();
+  sharpnessEnhancement(imagepath: string): void {
+    // event.preventDefault();
     this.imgBrightnessEnhPath = '';
     console.log('sharpness enhancement button clicked');
+
     let params = {
-      username: 'admin',
+      imagepath: this.originalImagePath
     };
 
     this.rpcService.callRPC(
@@ -137,7 +108,7 @@ export class MainPageComponent {
           console.log('sharpness enhancement does NOT work');
           return;
         } else {
-          event.preventDefault();
+          // event.preventDefault();
           console.log('sharpness enhancement works');
           this.imgSharpnessEnhPath = res.result;
         }
@@ -173,6 +144,7 @@ export class MainPageComponent {
 
   // exit function - returns to login page
   exitButton(): void {
+    this.resultButtonClicked = false;
     let copyInstance = this; // a copy of this class (atributes + methods)
     copyInstance.router.navigate(['/login']);
   }
