@@ -15,6 +15,9 @@ export class MainPageComponent {
   hasTumor = false; // are tumoare sau nu
   resultAfterProcessing = 0; // procentul de contor dupa procesarea imaginii
   resultButtonClicked = false; // s a apasat pe butonul de rezultat sau nu
+  brightness = 0;
+  contrast = 0;
+  isDisabled = true;
 
   constructor(private router: Router, private rpcService: RpcService) {}
 
@@ -27,6 +30,7 @@ export class MainPageComponent {
     this.imageSegmentationPath = ''
     this.imgBrightnessEnhPath = ''
     this.imgSharpnessEnhPath = ''
+    this.isDisabled = false;
   }
 
   // reseting images -> in order to process another image
@@ -64,13 +68,17 @@ export class MainPageComponent {
   }
 
   // process for image brightness enhancement
-  brightnessEnhancement(imagepath: string): void {
+  brightnessEnhancement(imagepath: string, brightness: number, contrast: number): void {
     // event.preventDefault();
+    brightness = 50;
+    contrast = 1,5;
     this.imgSharpnessEnhPath = '';
     console.log('brightness enhancement button clicked');
 
     let params = {
-      imagepath: this.originalImagePath
+      imagepath: this.originalImagePath,
+      brightness: brightness,
+      contrast: contrast
     };
 
     this.rpcService.callRPC(

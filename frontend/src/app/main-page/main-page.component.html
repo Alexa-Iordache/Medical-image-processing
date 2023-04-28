@@ -8,6 +8,8 @@
         #fileUpload
       />
       <button
+        [ngClass]="{ enabledButton: !isDisabled, disabledButton: isDisabled }"
+        [disabled]="isDisabled"
         mat-raised-button
         color="accent"
         class="menu-button"
@@ -16,14 +18,18 @@
         Image Segmentation
       </button>
       <button
+        [ngClass]="{ enabledButton: !isDisabled, disabledButton: isDisabled }"
+        [disabled]="isDisabled"
         mat-raised-button
         color="accent"
         class="menu-button"
-        (click)="brightnessEnhancement(originalImagePath)"
+        (click)="brightnessEnhancement(originalImagePath, brightness, contrast)"
       >
         Brightness & Contrast Enhancement
       </button>
       <button
+        [ngClass]="{ enabledButton: !isDisabled, disabledButton: isDisabled }"
+        [disabled]="isDisabled"
         mat-raised-button
         color="accent"
         class="menu-button"
@@ -32,6 +38,8 @@
         Sharpness Enhancement
       </button>
       <button
+        [ngClass]="{ enabledButton: !isDisabled, disabledButton: isDisabled }"
+        [disabled]="isDisabled"
         mat-raised-button
         color="accent"
         class="menu-button"
@@ -74,7 +82,7 @@
         class="title-and-photo"
       >
         <div class="image-title">
-          Image after brightness enhancement process:
+          Image after brightness and contrast enhancement:
         </div>
         <img src="{{ imgBrightnessEnhPath }}" class="photoDisplayed" />
       </div>
@@ -91,7 +99,7 @@
   </div>
 
   <div class="main-page_bottom-part">
-    <!-- <div class="parameters-containter">
+    <div class="parameters-containter">
       <mat-accordion>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
@@ -100,15 +108,26 @@
               Click here to see the parameter values
             </mat-panel-description>
           </mat-expansion-panel-header>
-          <p>Contrast</p>
-          <p>Entropy</p>
+          <div class="parameter_row">
+            <div>Brightness</div>
+            <input matInput placeholder="50" value="50" />
+            <!-- <div>{{ this.brightness }}</div> -->
+          </div>
+          <div class="parameter_row">
+            <div>Contrast</div>
+            <input matInput placeholder="1.5" value="1.5" />
+            <!-- <div>{{ this.contrast }}</div> -->
+          </div>
+          <!-- <p>Entropy</p>
           <p>IDM</p>
-          <p>Dissimilarity</p>
+          <p>Dissimilarity</p> -->
         </mat-expansion-panel>
       </mat-accordion>
-    </div> -->
+    </div>
 
     <button
+      [ngClass]="{ enabledButton: !isDisabled, disabledButton: isDisabled }"
+      [disabled]="isDisabled"
       mat-raised-button
       color="warn"
       class="result-button"

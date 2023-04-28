@@ -69,6 +69,18 @@
         height: 60px;
         margin-top: 10px;
       }
+
+      .enabledButton {
+        height: 60px;
+        margin-top: 10px;
+      }
+
+      .disabledButton {
+        height: 60px;
+        margin-top: 10px;
+        color: black;
+        background-color: grey;
+      }
     }
 
     .main-page_photo-container {
@@ -152,4 +164,11 @@
     color: green;
     margin-left: 20px;
   }
+}
+
+.parameter_row {
+  display: flex;
+  flex-direction: row;
+  width: 600px;
+  justify-content: space-between;
 }
