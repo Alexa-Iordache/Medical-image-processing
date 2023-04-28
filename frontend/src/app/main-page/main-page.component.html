@@ -110,13 +110,13 @@
           </mat-expansion-panel-header>
           <div class="parameter_row">
             <div>Brightness</div>
-            <input matInput placeholder="50" value="50" />
-            <!-- <div>{{ this.brightness }}</div> -->
+            <input matInput placeholder="50" value="50" #brightnessValue/>
+            <button mat-stroked-button (click)="changeBrightnessValue()">Change</button>
           </div>
           <div class="parameter_row">
             <div>Contrast</div>
-            <input matInput placeholder="1.5" value="1.5" />
-            <!-- <div>{{ this.contrast }}</div> -->
+            <input matInput placeholder="1.5" value="1.5" #contrastValue class="second-input"/>
+            <button mat-stroked-button (click)="changeContrastValue()">Change</button>
           </div>
           <!-- <p>Entropy</p>
           <p>IDM</p>

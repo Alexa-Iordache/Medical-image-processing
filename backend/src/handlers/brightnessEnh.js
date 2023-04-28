@@ -6,7 +6,7 @@ let brightness = {
     let imagepath = req.body.params.imagepath;
     let brightness = req.body.params.brightness;
     let contrast = req.body.params.contrast;
-    let command = `python3 src/handlers/brigtnessEnhCode.py --imagePath './src/processImages/${imagepath}' --brightness ${brightness} --contrast ${contrast}`;
+    let command = `python3 src/handlers/brigtnessEnhCode.py --imagePath './src/processImages/${imagepath}' --brightnessValue ${brightness} --contrastValue ${contrast}`;
 
     exec(command, (error, stdout, stderr) => {
       console.log("error: " + error);

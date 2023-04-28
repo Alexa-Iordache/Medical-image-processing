@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { RpcService } from '../services/rpc.service';
 
@@ -8,6 +8,9 @@ import { RpcService } from '../services/rpc.service';
   styleUrls: ['./main-page.component.scss'],
 })
 export class MainPageComponent {
+  @ViewChild('brightnessValue') brightnessValue: any;
+  @ViewChild('contrastValue') contrastValue: any;
+
   originalImagePath = '';
   imageSegmentationPath = '';
   imgBrightnessEnhPath = '';
@@ -15,7 +18,7 @@ export class MainPageComponent {
   hasTumor = false; // are tumoare sau nu
   resultAfterProcessing = 0; // procentul de contor dupa procesarea imaginii
   resultButtonClicked = false; // s a apasat pe butonul de rezultat sau nu
-  brightness = 0;
+  brightness =  0;
   contrast = 0;
   isDisabled = true;
 
@@ -70,8 +73,9 @@ export class MainPageComponent {
   // process for image brightness enhancement
   brightnessEnhancement(imagepath: string, brightness: number, contrast: number): void {
     // event.preventDefault();
-    brightness = 50;
-    contrast = 1,5;
+    brightness =  this.brightnessValue.nativeElement.value
+    contrast = this.contrastValue.nativeElement.value;
+    console.log(brightness, contrast);
     this.imgSharpnessEnhPath = '';
     console.log('brightness enhancement button clicked');
 
@@ -155,5 +159,21 @@ export class MainPageComponent {
     this.resultButtonClicked = false;
     let copyInstance = this; // a copy of this class (atributes + methods)
     copyInstance.router.navigate(['/login']);
+  }
+
+  changeBrightnessValue(): void {
+    console.log(this.brightnessValue.nativeElement.value);
+    this.brightness = this.brightnessValue.nativeElement.value;
+    this.imageSegmentationPath = ''
+    this.imgBrightnessEnhPath = ''
+    this.imgSharpnessEnhPath = ''
+  }
+
+  changeContrastValue(): void {
+    console.log(this.contrastValue.nativeElement.value);
+    this.contrast = this.contrastValue.nativeElement.value;
+    this.imageSegmentationPath = ''
+    this.imgBrightnessEnhPath = ''
+    this.imgSharpnessEnhPath = ''
   }
 }

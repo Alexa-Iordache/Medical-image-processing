@@ -169,6 +169,11 @@
 .parameter_row {
   display: flex;
   flex-direction: row;
-  width: 600px;
+  width: 100%;
   justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.second-input {
+  margin-right: -12px;
 }
