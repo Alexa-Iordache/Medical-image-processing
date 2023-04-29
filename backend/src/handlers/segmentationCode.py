@@ -32,7 +32,7 @@ def segmentationProcess(imagePath):
 
     cv2.imwrite('./src/processImages/imageSegmentated.png', result)
 
-    return '/imageSegmentated.png'
+    return 'imageSegmentated.png'
 
 # print (segmentationProcess())
 

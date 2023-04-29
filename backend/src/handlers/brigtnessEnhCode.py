@@ -22,7 +22,7 @@ def brightnessEnhProcess(imagePath, brightnessValue, contrastValue):
 
     cv2.imwrite('./src/processImages/brightnessEnh.png', adjusted)
 
-    return '/brightnessEnh.png'
+    return 'brightnessEnh.png'
 
 if __name__ == '__main__':
     # Define the command line arguments

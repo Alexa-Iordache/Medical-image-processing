@@ -6,5 +6,6 @@ module.exports = {
     brightness: require("./brightnessEnh"),
     contrast: require("./constrastEnh"),
     sharpness: require("./sharpnessEnh"),
-    tumorDetection: require("./tumorDetection")
+    tumorDetection: require("./tumorDetection"),
+    finalImage: require("./finalImage")
 };

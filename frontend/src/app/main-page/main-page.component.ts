@@ -11,48 +11,44 @@ export class MainPageComponent {
   @ViewChild('brightnessValue') brightnessValue: any;
   @ViewChild('contrastValue') contrastValue: any;
 
+  // images' path
   originalImagePath = '';
   imageSegmentationPath = '';
   imgBrightnessEnhPath = '';
   imgSharpnessEnhPath = '';
-  hasTumor = false; // are tumoare sau nu
-  resultAfterProcessing = 0; // procentul de contor dupa procesarea imaginii
-  resultButtonClicked = false; // s a apasat pe butonul de rezultat sau nu
+  imgFinalPath = '';
+
+  hasTumor = false; // tumor detected ot not
+
+  resultAfterProcessing = 0; // contour procent resulted after image processing
+
+  resultButtonClicked = false;
+  finalImageButton = false;
   brightness =  0;
   contrast = 0;
-  isDisabled = true;
+  isDisabled = true; // processing buttons are disabled until an image is uploaded
+  resultButtonsDisabled= true; // buttons for final result are disabled until sharpness button is clicked
 
   constructor(private router: Router, private rpcService: RpcService) {}
 
   // uploading an image
-  onFileSelected(event: any) {
-    event.stopPropagation();
-    const file: File = event.target.files[0];
-    console.log(file.name);
-    this.originalImagePath = file.name;
-    this.imageSegmentationPath = ''
-    this.imgBrightnessEnhPath = ''
-    this.imgSharpnessEnhPath = ''
-    this.isDisabled = false;
+  fileUpload(event: any) {
+    let variable = [];
+    variable = event.value.filename.split('\\');
+    this.originalImagePath = variable[2];
+    this.isDisabled = false; // the buttons are no longer disabled
   }
 
   // reseting images -> in order to process another image
   resetButton() {
-    this.originalImagePath = '';
-    this.imageSegmentationPath = '';
-    this.imgBrightnessEnhPath = '';
-    this.imgSharpnessEnhPath = '';
-    this.resultButtonClicked = false;
+    window.location.reload();
   }
 
   // process for image segmentation
   imageSegmentation(imagepath: string): void {
-    // event.preventDefault();
-    console.log('image segmentation button clicked');
     let params = {
       imagepath: this.originalImagePath
     };
-    // console.log(params.imagepath);
 
     this.rpcService.callRPC(
       'segmentation.imageSegmentation',
@@ -62,7 +58,6 @@ export class MainPageComponent {
           console.log('segmentation does NOT work');
           return;
         } else {
-          // event.preventDefault();
           console.log('segmentation works');
           this.imageSegmentationPath = res.result;
         }
@@ -72,12 +67,10 @@ export class MainPageComponent {
 
   // process for image brightness enhancement
   brightnessEnhancement(imagepath: string, brightness: number, contrast: number): void {
-    // event.preventDefault();
     brightness =  this.brightnessValue.nativeElement.value
     contrast = this.contrastValue.nativeElement.value;
     console.log(brightness, contrast);
     this.imgSharpnessEnhPath = '';
-    console.log('brightness enhancement button clicked');
 
     let params = {
       imagepath: this.originalImagePath,
@@ -93,9 +86,7 @@ export class MainPageComponent {
           console.log('brightness enhancement does NOT work');
           return;
         } else {
-          // event.preventDefault();
           console.log('brightness enhancement works');
-          console.log(res.result);
           this.imgBrightnessEnhPath = res.result;
         }
       }
@@ -104,9 +95,8 @@ export class MainPageComponent {
 
   // process for image sharpness enhancement
   sharpnessEnhancement(imagepath: string): void {
-    // event.preventDefault();
     this.imgBrightnessEnhPath = '';
-    console.log('sharpness enhancement button clicked');
+    this.resultButtonsDisabled = false;
 
     let params = {
       imagepath: this.originalImagePath
@@ -120,7 +110,6 @@ export class MainPageComponent {
           console.log('sharpness enhancement does NOT work');
           return;
         } else {
-          // event.preventDefault();
           console.log('sharpness enhancement works');
           this.imgSharpnessEnhPath = res.result;
         }
@@ -130,7 +119,6 @@ export class MainPageComponent {
 
   // tumor detection function
   showResults(): void {
-    console.log('tumor detection button clicked');
     let params = {
       username: 'admin',
     };
@@ -147,8 +135,30 @@ export class MainPageComponent {
         } else {
           console.log('tumor detection works');
           this.resultAfterProcessing = res.result;
-          console.log(this.resultAfterProcessing);
           if (this.resultAfterProcessing > 1000) this.hasTumor = true;
+        }
+      }
+    );
+  }
+
+  // showing final image
+  showFinalImage(): void {
+    let params = {
+      username: 'admin',
+    };
+
+    this.finalImageButton = true;
+
+    this.rpcService.callRPC(
+      'finalImage.showFinalImage',
+      params,
+      (err: any, res: any) => {
+        if (err || res.error) {
+          console.log('showing final image does NOT work');
+          return;
+        } else {
+          console.log('showing final image works');
+          this.imgFinalPath = res.result;
         }
       }
     );

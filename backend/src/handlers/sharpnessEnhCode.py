@@ -17,7 +17,7 @@ def sharpnessEnhProcess(imagePath):
     # Display the images
     cv2.imwrite('./src/processImages/sharpnessEnh.png', sharp)
 
-    return '/sharpnessEnh.png'
+    return 'sharpnessEnh.png'
     
 
 if __name__ == '__main__':

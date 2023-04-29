@@ -1,12 +1,11 @@
 <div class="main-page">
   <div class="main-page_top-part">
     <div class="main-page_menu-container">
-      <input
-        type="file"
-        class="file-input"
-        (change)="onFileSelected($event)"
-        #fileUpload
-      />
+      <form #heroForm="ngForm">
+        <input type="file" id="myFile" name="filename" ngModel />
+        <input (click)="fileUpload(heroForm)" type="submit" />
+      </form>
+
       <button
         [ngClass]="{ enabledButton: !isDisabled, disabledButton: isDisabled }"
         [disabled]="isDisabled"
@@ -110,13 +109,23 @@
           </mat-expansion-panel-header>
           <div class="parameter_row">
             <div>Brightness</div>
-            <input matInput placeholder="50" value="50" #brightnessValue/>
-            <button mat-stroked-button (click)="changeBrightnessValue()">Change</button>
+            <input matInput placeholder="50" value="50" #brightnessValue />
+            <button mat-stroked-button (click)="changeBrightnessValue()">
+              Change
+            </button>
           </div>
           <div class="parameter_row">
             <div>Contrast</div>
-            <input matInput placeholder="1.5" value="1.5" #contrastValue class="second-input"/>
-            <button mat-stroked-button (click)="changeContrastValue()">Change</button>
+            <input
+              matInput
+              placeholder="1.5"
+              value="1.5"
+              #contrastValue
+              class="second-input"
+            />
+            <button mat-stroked-button (click)="changeContrastValue()">
+              Change
+            </button>
           </div>
           <!-- <p>Entropy</p>
           <p>IDM</p>
@@ -125,29 +134,58 @@
       </mat-accordion>
     </div>
 
-    <button
-      [ngClass]="{ enabledButton: !isDisabled, disabledButton: isDisabled }"
-      [disabled]="isDisabled"
-      mat-raised-button
-      color="warn"
-      class="result-button"
-      (click)="showResults()"
-    >
-      Show result
-    </button>
-    <div class="result_container">
-      <div class="result_title">RESULT:</div>
-      <div
-        *ngIf="hasTumor == true && resultButtonClicked == true"
-        class="positive_result"
-      >
-        tumor detected
+    <div class="bottom_containers">
+      <div class="left_container">
+        <button
+          *ngIf="finalImageButton == false"
+          [ngClass]="{
+            enabledFinalButton: !resultButtonsDisabled,
+            disabledResultButton: resultButtonsDisabled
+          }"
+          [disabled]="resultButtonsDisabled"
+          mat-raised-button
+          (click)="showFinalImage()"
+        >
+          Show image after processing
+        </button>
+
+        <div *ngIf="finalImageButton == true" class="title-and-photo-resulted">
+          <div class="image-title">Processed image:</div>
+          <img src="{{ imgFinalPath }}" class="resultedImageDisplayed" />
+        </div>
       </div>
-      <div
-        *ngIf="hasTumor == false && resultButtonClicked == true"
-        class="negative_result"
-      >
-        tumor is not detected
+
+      <div class="right_container">
+        <button
+          *ngIf="resultButtonClicked == false"
+          [ngClass]="{
+            enabledResultButton: !resultButtonsDisabled,
+            disabledResultButton: resultButtonsDisabled
+          }"
+          [disabled]="resultButtonsDisabled"
+          mat-raised-button
+          (click)="showResults()"
+        >
+          Show result
+        </button>
+
+        <div class="result_container">
+          <div *ngIf="resultButtonClicked == true" class="result_title">
+            RESULT:
+          </div>
+          <div
+            *ngIf="hasTumor == true && resultButtonClicked == true"
+            class="positive_result"
+          >
+            tumor detected
+          </div>
+          <div
+            *ngIf="hasTumor == false && resultButtonClicked == true"
+            class="negative_result"
+          >
+            tumor is not detected
+          </div>
+        </div>
       </div>
     </div>
   </div>
