@@ -57,18 +57,21 @@
     </div>
 
     <div class="main-page_photo-container">
-      <div *ngIf="originalImagePath === ''" class="imageContainer">photo1</div>
+      <div
+        *ngIf="
+          originalImagePath === '' &&
+          imgBrightnessEnhPath === '' &&
+          imageSegmentationPath === '' &&
+          imgSharpnessEnhPath === ''
+        "
+        class="placehorder_text"
+      >
+        photos will be displayed here
+      </div>
 
       <div *ngIf="originalImagePath !== ''" class="title-and-photo">
         <div class="image-title">Original image:</div>
         <img src="{{ originalImagePath }}" class="photoDisplayed" />
-      </div>
-
-      <div
-        *ngIf="imageSegmentationPath === '' && imgBrightnessEnhPath === ''"
-        class="imageContainer"
-      >
-        photo2
       </div>
 
       <div *ngIf="imageSegmentationPath !== ''" class="title-and-photo">
@@ -102,34 +105,39 @@
       <mat-accordion>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
-            <mat-panel-title> Parameters </mat-panel-title>
+            <mat-panel-title>
+              Parameters for brightness and contrast enhancement
+            </mat-panel-title>
             <mat-panel-description>
               Click here to see the parameter values
             </mat-panel-description>
           </mat-expansion-panel-header>
-          <div class="parameter_row">
-            <div>Brightness</div>
-            <input matInput placeholder="50" value="50" #brightnessValue />
-            <button mat-stroked-button (click)="changeBrightnessValue()">
+          <div class="inputs_and_button">
+            <div class="inputs_containers">
+              <div class="parameter_row">
+                <div>Brightness</div>
+                <input matInput placeholder="50" value="50" #brightnessValue />
+              </div>
+
+              <div class="parameter_row">
+                <div>Contrast</div>
+                <input matInput placeholder="1.5" value="1.5" #contrastValue />
+              </div>
+            </div>
+            <button
+              mat-stroked-button
+              class="changeBrightnessContrastButton"
+              (click)="
+                changeBrightnessContrast(
+                  originalImagePath,
+                  brightness,
+                  contrast
+                )
+              "
+            >
               Change
             </button>
           </div>
-          <div class="parameter_row">
-            <div>Contrast</div>
-            <input
-              matInput
-              placeholder="1.5"
-              value="1.5"
-              #contrastValue
-              class="second-input"
-            />
-            <button mat-stroked-button (click)="changeContrastValue()">
-              Change
-            </button>
-          </div>
-          <!-- <p>Entropy</p>
-          <p>IDM</p>
-          <p>Dissimilarity</p> -->
         </mat-expansion-panel>
       </mat-accordion>
     </div>

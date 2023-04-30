@@ -1,25 +1,38 @@
 import cv2
 import numpy as np
+import argparse
+import tempfile
+import os
 
-def contrastEnhProcess():
-
+def brightnessEnhProcess(imagePath, brightnessValue, contrastValue):
     # Load the image
-    img = cv2.imread('./src/processImages/tumor.jpeg')
+    # img = cv2.imread('./src/processImages/tumor.jpeg')
+    img = cv2.imread(imagePath)
 
-    # Convert the image to grayscale
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    # Define the brightness and contrast values
+    brightness = brightnessValue
+    contrast = contrastValue
 
-    # Apply adaptive histogram equalization
-    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
-    equalized = clahe.apply(gray)
+    # Apply brightness and contrast adjustments
+    adjusted = np.int16(img)
+    adjusted = adjusted * contrast + brightness
+    adjusted = np.clip(adjusted, 0, 255)
+    adjusted = np.uint8(adjusted)
 
-    # Apply contrast stretching
-    minmax = np.percentile(equalized, (5, 95))
-    stretched = np.uint8(np.clip((equalized - minmax[0]) / (minmax[1] - minmax[0]) * 255, 0, 255))
-
-    # Display the images
-    cv2.imwrite('./src/processImages/contrastEnh.png', stretched)
+    cv2.imwrite('./src/processImages/contrastEnh.png', adjusted)
     
-    return '/contrastEnh.png'
-    
-print (contrastEnhProcess())
+    # print(contrast)
+    return 'contrastEnh.png'
+
+if __name__ == '__main__':
+    # Define the command line arguments
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--imagePath', type=str, help='The first parameter')
+    parser.add_argument('--brightnessValue', type=int, help='The second parameter')
+    parser.add_argument('--contrastValue', type=float, help='The third parameter')
+
+    # Parse the command line arguments
+    args = parser.parse_args()
+
+    # Call the function with the parsed parameters
+    print(brightnessEnhProcess(args.imagePath, args.brightnessValue, args.contrastValue))

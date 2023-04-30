@@ -66,16 +66,18 @@ export class MainPageComponent {
   }
 
   // process for image brightness enhancement
-  brightnessEnhancement(imagepath: string, brightness: number, contrast: number): void {
-    brightness =  this.brightnessValue.nativeElement.value
-    contrast = this.contrastValue.nativeElement.value;
-    console.log(brightness, contrast);
+  brightnessEnhancement(imagepath: string, brightnessVal: number, contrastVal: number): void {
+    this.imgBrightnessEnhPath = '';
+    brightnessVal =  this.brightnessValue.nativeElement.value
+    contrastVal = this.contrastValue.nativeElement.value;
+    console.log(brightnessVal, contrastVal);
+    // console.log('noua ruta:  ' + imagepath);
     this.imgSharpnessEnhPath = '';
 
     let params = {
       imagepath: this.originalImagePath,
-      brightness: brightness,
-      contrast: contrast
+      brightness: brightnessVal,
+      contrast: contrastVal
     };
 
     this.rpcService.callRPC(
@@ -88,6 +90,7 @@ export class MainPageComponent {
         } else {
           console.log('brightness enhancement works');
           this.imgBrightnessEnhPath = res.result;
+          // console.log('dupa:  ' + this.imgBrightnessEnhPath);
         }
       }
     );
@@ -171,19 +174,34 @@ export class MainPageComponent {
     copyInstance.router.navigate(['/login']);
   }
 
-  changeBrightnessValue(): void {
-    console.log(this.brightnessValue.nativeElement.value);
-    this.brightness = this.brightnessValue.nativeElement.value;
+  // process original image with the new values for brightness and contrast
+  changeBrightnessContrast(imagepath: string, brightnessVal: number, contrastVal: number): void {
+    this.imgBrightnessEnhPath = '';
+    brightnessVal =  this.brightnessValue.nativeElement.value
+    contrastVal = this.contrastValue.nativeElement.value;
+    console.log(brightnessVal, contrastVal);
     this.imageSegmentationPath = ''
     this.imgBrightnessEnhPath = ''
     this.imgSharpnessEnhPath = ''
-  }
 
-  changeContrastValue(): void {
-    console.log(this.contrastValue.nativeElement.value);
-    this.contrast = this.contrastValue.nativeElement.value;
-    this.imageSegmentationPath = ''
-    this.imgBrightnessEnhPath = ''
-    this.imgSharpnessEnhPath = ''
+    let params = {
+      imagepath: this.originalImagePath,
+      brightness: brightnessVal,
+      contrast: contrastVal
+    };
+
+    this.rpcService.callRPC(
+      'contrast.contrastEnhancement',
+      params,
+      (err: any, res: any) => {
+        if (err || res.error) {
+          console.log('contarst enhancement does NOT work');
+          return;
+        } else {
+          console.log('contrast enhancement works');
+          this.imgBrightnessEnhPath = res.result;
+        }
+      }
+    );
   }
 }

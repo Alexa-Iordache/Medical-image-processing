@@ -88,16 +88,22 @@
         flex,
         row,
         space-between,
-        1000px,
+        100%,
         300px,
         80px,
         100px,
         50px
       );
 
-      .imageContainer {
-        @include photo(1px, solid, black, 100%, 30px);
-        margin-top: 50px;
+      .placehorder_text {
+        font-family: "Inter";
+        font-size: 30px;
+        font-weight: 600;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 200px;
       }
 
       .title-and-photo {
@@ -108,8 +114,8 @@
 
         .image-title {
           font-family: "Inter";
-          font-size: 16px;
-          font-weight: 12px;
+          font-size: 20px;
+          font-weight: 500;
           margin-bottom: 10px;
         }
 
@@ -130,6 +136,34 @@
 
     .parameters-containter {
       width: 100%;
+
+      .inputs_and_button {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+
+        .inputs_containers {
+          display: flex;
+          flex-direction: column;
+          width: 600px;
+          justify-content: space-between;
+          align-items: center;
+
+          .parameter_row {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            justify-content: space-between;
+            margin-bottom: 20px;
+          }
+        }
+
+        .changeBrightnessContrastButton {
+          margin-right: 100px;
+        }
+      }
     }
 
     .bottom_containers {
@@ -226,16 +260,4 @@
       }
     }
   }
-}
-
-.parameter_row {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.second-input {
-  margin-right: -12px;
 }
