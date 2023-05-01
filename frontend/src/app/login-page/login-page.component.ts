@@ -11,6 +11,7 @@ import { RpcService } from '../services/rpc.service';
 export class LoginPageComponent implements OnInit {
 
   public authFailed = false;
+  loginButtonClicked = false;
 
   @Input() currentPage: any
   @Output() loginButtonPressed = new EventEmitter<string>();
@@ -22,8 +23,13 @@ export class LoginPageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.loginButtonClicked = false;
     if (!this.currentPage)
       this.currentPage = 'login';
+  }
+
+  loginButton(): void {
+    this.loginButtonClicked = true;
   }
 
   login(username: string, password: string): void {

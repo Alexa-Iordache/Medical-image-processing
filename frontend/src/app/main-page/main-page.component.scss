@@ -45,9 +45,56 @@
 }
 
 .main-page {
-  height: 100%;
-  width: 100%;
-  background-image: url("../../images/main-page.png");
+  position: relative;
+  height: 1200px;
+  background-color: #ff4343;
+
+  .white_container {
+    position: relative;
+    top: 12px;
+    margin-left: 91px;
+    margin-right: 12px;
+    background-color: #f0f0f0;
+    border-radius: 20px;
+  }
+
+  .navbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+    background-color: #F39F9F;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+
+    .navbar_text {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      height: 100%;
+      margin-left: 50px;
+
+      .navbar_text_first {
+        font-family: "Inter";
+        font-size: 40px;
+        font-weight: 700;
+        color: black;
+      }
+
+      .navbar_text_second {
+        margin-left: 10px;
+        font-family: "Inter";
+        font-size: 40px;
+        font-weight: 700;
+        color: #DFFDDD;
+      }
+    }
+
+    .navbar_exit-icon {
+      margin-right: 50px;
+    }
+  }
 
   .main-page_top-part {
     display: flex;
@@ -60,7 +107,7 @@
         space-between,
         250px,
         auto,
-        100px,
+        50px,
         0,
         50px
       );
@@ -114,14 +161,14 @@
 
         .image-title {
           font-family: "Inter";
-          font-size: 20px;
+          font-size: 15px;
           font-weight: 500;
           margin-bottom: 10px;
         }
 
         .photoDisplayed {
-          width: 300px;
-          height: 300px;
+          width: 250px;
+          height: 250px;
           margin-right: 50px;
         }
       }
@@ -173,6 +220,7 @@
       height: 100%;
       justify-content: center;
       margin-top: 20px;
+      margin-bottom: 30px;
 
       .left_container {
         display: flex;
@@ -185,7 +233,7 @@
         }
 
         .enabledFinalButton {
-          background-color: rgb(237, 68, 68);
+          background-color: #F39F9F;
           margin-top: 50px;
           margin-right: 50px;
         }
@@ -217,7 +265,7 @@
         }
 
         .enabledResultButton {
-          background-color: rgb(237, 174, 55);
+          background-color: #F39F9F;
           margin-top: 50px;
           margin-left: 50px;
         }
